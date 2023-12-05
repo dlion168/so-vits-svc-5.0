@@ -15,8 +15,8 @@ def main(args):
     if (args.ppg == None):
         args.ppg = "svc_tmp.ppg.npy"
         print(
-            f"Auto run : python whisper/inference.py -w {args.wave} -p {args.ppg}")
-        os.system(f"python whisper/inference.py -w {args.wave} -p {args.ppg}")
+            f"Auto run : python whisper_local/inference.py -w {args.wave} -p {args.ppg}")
+        os.system(f"python whisper_local/inference.py -w {args.wave} -p {args.ppg}")
 
     if (args.vec == None):
         args.vec = "svc_tmp.vec.npy"

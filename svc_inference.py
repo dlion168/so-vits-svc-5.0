@@ -8,6 +8,7 @@ from omegaconf import OmegaConf
 from scipy.io.wavfile import write
 from vits.models import SynthesizerInfer
 from pitch import load_csv_pitch
+import math
 
 
 def load_svc_model(checkpoint_path, model):
@@ -88,8 +89,8 @@ def main(args):
     if (args.ppg == None):
         args.ppg = "svc_tmp.ppg.npy"
         print(
-            f"Auto run : python whisper/inference.py -w {args.wave} -p {args.ppg}")
-        os.system(f"python whisper/inference.py -w {args.wave} -p {args.ppg}")
+            f"Auto run : python whisper_local/inference.py -w {args.wave} -p {args.ppg}")
+        os.system(f"python whisper_local/inference.py -w {args.wave} -p {args.ppg}")
 
     if (args.vec == None):
         args.vec = "svc_tmp.vec.npy"
@@ -127,6 +128,11 @@ def main(args):
     # vec = torch.zeros_like(vec)
 
     pit = load_csv_pitch(args.pit)
+
+    if (args.tgt_median_pitch != 0 ):
+        src_median = np.median(np.array(pit))
+        args.shift = 12 * math.log2(args.tgt_median_pitch/src_median)
+
     print("pitch shift: ", args.shift)
     if (args.shift == 0):
         pass
@@ -165,6 +171,8 @@ if __name__ == '__main__':
                         help="Path of pitch csv file.")
     parser.add_argument('--shift', type=int, default=0,
                         help="Pitch shift key.")
+    parser.add_argument('--tgt_median_pitch', type=float, default=0,
+                        help="Median pitch of target speaker. Apply pitch of target speaker to generated song.")
     args = parser.parse_args()
 
     main(args)
