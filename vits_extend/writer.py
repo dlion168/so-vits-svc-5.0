@@ -9,7 +9,7 @@ class MyWriter(SummaryWriter):
         super(MyWriter, self).__init__(logdir)
         self.sample_rate = hp.data.sampling_rate
 
-    def log_training(self, g_loss, d_loss, mel_loss, stft_loss, k_loss, r_loss, score_loss, step):
+    def log_training(self, g_loss, d_loss, mel_loss, stft_loss, k_loss, r_loss, i_loss, score_loss, step):
         self.add_scalar('train/g_loss', g_loss, step)
         self.add_scalar('train/d_loss', d_loss, step)
         
@@ -18,6 +18,7 @@ class MyWriter(SummaryWriter):
         self.add_scalar('train/mel_loss', mel_loss, step)
         self.add_scalar('train/kl_f_loss', k_loss, step)
         self.add_scalar('train/kl_r_loss', r_loss, step)
+        self.add_scalar('train/spk_loss', i_loss, step)
 
     def log_validation(self, mel_loss, generator, discriminator, step):
         self.add_scalar('validation/mel_loss', mel_loss, step)
