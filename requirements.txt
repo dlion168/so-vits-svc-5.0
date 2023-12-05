@@ -14,3 +14,6 @@ ruamel.yaml
 resampy
 numpy==1.24
 chardet
+jiwer
+whisper
+pymcd

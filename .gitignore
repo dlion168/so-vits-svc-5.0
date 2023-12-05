@@ -6,5 +6,6 @@
 ./sovits5.0.pth
 ./svc_out*
 ./svc_tmp*
+./*.npy
 ./*.wav
 ./chpkt
