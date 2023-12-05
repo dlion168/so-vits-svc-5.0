@@ -4,8 +4,8 @@ import numpy as np
 import argparse
 import torch
 
-from whisper.model import Whisper, ModelDimensions
-from whisper.audio import load_audio, pad_or_trim, log_mel_spectrogram
+from whisper_local.model import Whisper, ModelDimensions
+from whisper_local.audio import load_audio, pad_or_trim, log_mel_spectrogram
 
 
 def load_model(path, device) -> Whisper:

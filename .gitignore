@@ -1,0 +1,10 @@
+./hubert_pretrain
+./speaker_pretrain
+./vits_pretrain
+./whisper_pretrain
+./crepe/assets
+./sovits5.0.pth
+./svc_out*
+./svc_tmp*
+./*.wav
+./chpkt

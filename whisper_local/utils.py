@@ -2,7 +2,7 @@ import json
 import os
 import sys
 import zlib
-from typing import Callable, TextIO
+from typing import Callable, Optional, TextIO
 
 system_encoding = sys.getdefaultencoding()
 
@@ -68,6 +68,7 @@ class ResultWriter:
 
     def __call__(self, result: dict, audio_path: str):
         audio_basename = os.path.basename(audio_path)
+        audio_basename = os.path.splitext(audio_basename)[0]
         output_path = os.path.join(self.output_dir, audio_basename + "." + self.extension)
 
         with open(output_path, "w", encoding="utf-8") as f:
@@ -153,7 +154,9 @@ def get_writer(output_format: str, output_dir: str) -> Callable[[dict, TextIO], 
     if output_format == "all":
         all_writers = [writer(output_dir) for writer in writers.values()]
 
-        def write_all(result: dict, file: TextIO):
+        def write_all(
+            result: dict, file: TextIO
+        ):
             for writer in all_writers:
                 writer(result, file)
 
