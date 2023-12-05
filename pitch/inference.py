@@ -107,7 +107,8 @@ def save_csv_pitch(pitch, path):
             seconds = (t - minute * 60000) // 1000
             millisecond = t % 1000
             print(
-                f"{minute}m {seconds}s {millisecond:3d},{int(pitch[i])}", file=pitch_file)
+                 f"{minute}m {seconds}s {millisecond:3d},{pitch[i]}", file=pitch_file)
+            #    f"{minute}m {seconds}s {millisecond:3d},{int(pitch[i])}", file=pitch_file)
 
 
 def load_csv_pitch(path):
@@ -115,7 +116,8 @@ def load_csv_pitch(path):
     with open(path, "r", encoding='utf-8') as pitch_file:
         for line in pitch_file.readlines():
             pit = line.strip().split(",")[-1]
-            pitch.append(int(pit))
+            # pitch.append(int(pit))
+            pitch.append(float(pit))
     return pitch
 
 
